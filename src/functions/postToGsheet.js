@@ -1,13 +1,11 @@
 const { google } = require('googleapis');
 const fs = require('fs');
-const readline = require('readline');
 require('dotenv').config(); 
 const getCurrentDate = require('./utils');
 
-// Load credentials from the JSON file obtained from the Google Developers Console
+// Load credentials and setup auth
 const credentials = JSON.parse(fs.readFileSync('credentials.json'));
-
-// Create a new JWT client using the credentials
+const spreadsheetId = process.env.pinup_sheet_id;
 const client = new google.auth.JWT(
     credentials.client_email,
     null,
@@ -15,48 +13,47 @@ const client = new google.auth.JWT(
     ['https://www.googleapis.com/auth/spreadsheets']
 );
 
-// Set the ID of the Google Sheets you want to write to
-const spreadsheetId = process.env.pinup_sheet_id;
-
-// Function to append data to the Google Sheets
 async function writeToSheet(discordUser, sheetName) {
     try {
-        // Authorize the client and obtain an access token
+        // Authenticate
         await client.authorize();
-
-        // Create a new instance of Google Sheets API
         const sheets = google.sheets({ version: 'v4', auth: client });
 
-        // Retrieve existing data to determine the next empty row
+        // Retrieve existing data to check if the user already exists
+        console.log('getting values...')
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,
-            range: `${sheetName}!A:B`,
+            range: `${sheetName}!A:A`, // Check only the first column (Discord users)
         });
 
-        // Calculate the next empty row by adding 1 to the length of existing data
-        const nextRow = response.data.values ? response.data.values.length + 1 : 1;
+        // Check if the user already exists in the sheet
+        const existingUserRows = response.data.values ? response.data.values.filter(row => row[0] === discordUser) : [];
+        if (existingUserRows.length > 1) {
+            throw new Error(`User has already logged 2 ${sheetName}`);
+        }
 
-        // Define the range where you want to append the data
+        // Find next empty row and append data
+        const nextRow = response.data.values ? response.data.values.length + 1 : 1;
         const range = `${sheetName}!A${nextRow}:B${nextRow}`;
 
-        // Prepare the request body
+        // Prepare and submit data
         const requestBody = {
             spreadsheetId,
             range,
             valueInputOption: 'RAW',
             resource: {
-                values: [
-                    [discordUser, getCurrentDate()] // Data to be appended, formatted as an array
-                ]
+                values: [ [String(discordUser), getCurrentDate()] ]
+              
             }
         };
 
-        // Make the append request to Google Sheets API
-        const appendResponse = await sheets.spreadsheets.values.append(requestBody);
-        console.log('Data appended successfully:', appendResponse.data);
+        await sheets.spreadsheets.values.append(requestBody);
+        return true;
+
     } catch (error) {
-        console.error('Error appending data:', error);
+        console.log('error: ', error.message)
+        return false;
     }
 }
 
-module.exports = writeToSheet;
+    module.exports = writeToSheet;
