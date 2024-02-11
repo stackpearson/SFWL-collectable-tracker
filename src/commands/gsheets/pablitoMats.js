@@ -4,16 +4,16 @@ require('dotenv').config();
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('pinup')
-        .setDescription('Track a pinup collection')
+        .setName('pablitomats')
+        .setDescription('Track a Pablito Mat collection')
         .addStringOption(option => option.setName("name").setDescription(`This is a name`).setRequired(true)), 
     async execute(interaction) {
         try {
             const name = await interaction.options.getString("name");
             // Call writeToSheet function and handle any errors
-            const tryWrite = await writeToSheet(name, 'pinups');
+            const tryWrite = await writeToSheet(name, 'pablitoMats');
             if (tryWrite) {
-                await interaction.reply({ content: `Pinup poster succesfully tracked https://tenor.com/bbiKC.gif`, ephemeral: true });
+                await interaction.reply({ content: `Pinup succesfully tracked https://tenor.com/bbiKC.gif`, ephemeral: true });
             } else {
                 await interaction.reply({ content: `Sneaky Sneaky, you've already logged two collectables https://tenor.com/bczMQ.gif`, ephemeral: true });
             }
