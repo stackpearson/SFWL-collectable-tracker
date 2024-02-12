@@ -48,6 +48,7 @@ async function writeToSheet(discordUser, sheetName) {
         };
 
         await sheets.spreadsheets.values.append(requestBody);
+        console.log(`tracked ${sheetName} for user ${discordUser}`)
         return true;
 
     } catch (error) {
