@@ -23,7 +23,7 @@ async function writeToSheet(discordUser, sheetName) {
         console.log('getting values...')
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,
-            range: `${sheetName}!A:A`, // Check only the first column (Discord users)
+            range: `${sheetName}!A:A`,
         });
 
         // Check if the user already exists in the sheet
