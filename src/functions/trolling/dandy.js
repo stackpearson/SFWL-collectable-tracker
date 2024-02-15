@@ -3,6 +3,9 @@ require('dotenv').config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
+
+// const specificUserId = '385926621984587777' //snowhound
+// const specificChannelId = '1205666282775642142' //bot-testing
 const specificUserId = '414886679267115009';
 const specificChannelId = '1130323063473442856';
 const possibleReplies = [
@@ -21,32 +24,27 @@ const possibleReplies = [
     'https://tenor.com/bvXRc.gif'
 ]
 
+const keyWords = [
+    'died', 'dead', 'heli', 'lizard', 'admin', 'coast', 'fuck', 'tissy', 'run', 'bm', 'pack', 'tea time'
+]
+
+
+
 async function dandyTroll(){
     client.once('ready', () => {
     });
     
     client.on('messageCreate', async message => {
-        // console.log('Message received from:', message.channel.id);
-    
-        // Check if the message is from the specific user and in the specific channel
         if (message.author.id === specificUserId && message.channel.id === specificChannelId) {
-            // Fetch recent messages in the channel (including the current message)
-            const messages = await message.channel.messages.fetch({ limit: 50 });
-    
-            // Filter out messages sent by the specific user
-            const userMessages = messages.filter(msg => msg.author.id === specificUserId);
-    
-            // Count the number of messages sent by the specific user
-            const messageCount = userMessages.size;
-    
-            if (messageCount === 50) {
-                const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
-                await message.reply(randomReply);
-            } else if (messageCount > 50) {
-                return
-            }
+          const messageContent = message.content.toLowerCase();
+          const containsKeyword = keyWords.some(keyword => messageContent.includes(keyword));
+
+          if (containsKeyword) {
+            const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
+            await message.reply(randomReply);
+          }
         }
-    });
+      });
 }
 
 
