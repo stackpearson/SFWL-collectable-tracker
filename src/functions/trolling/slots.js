@@ -32,11 +32,11 @@ const inGameChatId = '1145102903003074672';
 
 
 
-function dandyTroll(){
+function slots(){
     client.once('ready', () => {
     });
     client.on('messageCreate', message => {
-        if (message.channel.id === inGameChatId)
+        if (message.channel.id === inGameChatId) return;
         if (message.author.bot) return;
         if (message.content.toLowerCase() === 'slots') {
             const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
@@ -50,4 +50,4 @@ function dandyTroll(){
 
 client.login(process.env.token);
 
-module.exports = dandyTroll;
+module.exports = slots;
