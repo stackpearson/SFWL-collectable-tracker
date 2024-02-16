@@ -36,9 +36,10 @@ function slots(){
     client.once('ready', () => {
     });
     client.on('messageCreate', message => {
+        const messageContent = message.content.toLocaleLowerCase();
         if (message.channel.id === inGameChatId) return;
         if (message.author.bot) return;
-        if (message.content.toLowerCase() === 'slots') {
+        if (messageContent.includes('slots')) {
             const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
             message.reply(randomReply);
             message.react(slotsReactId)

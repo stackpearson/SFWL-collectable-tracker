@@ -44,7 +44,7 @@ const possibleReplies = [
 ]
 
 const keyWords = [
-    'died', 'dead', 'heli', 'admin', 'coast', 'tissy', 'run', 'bm', 'pack', 'tea', 'dropped', 'crash', 'lag', 'log'
+    'died', 'dead', 'heli', 'admin', 'coast', 'tissy', 'run', 'bm', 'pack', 'dropped', 'crash', 'lag', 'log'
 ]
 
 
