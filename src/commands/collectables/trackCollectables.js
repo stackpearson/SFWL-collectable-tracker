@@ -29,13 +29,13 @@ module.exports = {
         try {
 
             const collectableSheetName = await interaction.options.getString("collectable");
-            const user = await interaction.options.getMentionable('user');
+            const user = await interaction.options.getUser('user');
             const tryWrite = await writeToSheet(user.id, collectableSheetName);
 
             if (tryWrite) {
-                await interaction.reply({ content: `${collectableSheetName} successfully tracked! https://tenor.com/bbiKC.gif`, ephemeral: false });
+                await interaction.reply({ content: `${collectableSheetName} successfully tracked for ${user.globalName}! https://tenor.com/bbiKC.gif`, ephemeral: false });
             } else {
-                await interaction.reply({ content: `This user's cap has already been met for ${collectableSheetName}s https://tenor.com/bczMQ.gif`, ephemeral: false });
+                await interaction.reply({ content: `${user.globalName} has already met the cap for ${collectableSheetName}s https://tenor.com/bczMQ.gif`, ephemeral: false });
             }
 
         } catch (error) {
