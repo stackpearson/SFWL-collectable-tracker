@@ -7,7 +7,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 // const specificUserId = '385926621984587777' //snowhound
 // const specificChannelId = '1205666282775642142' //bot-testing
 const specificUserId = '414886679267115009';
-const specificChannelId = '1130323063473442856';
+// const specificChannelId = '1130323063473442856'; // general
+const specificChannelId = '1194968842338832495'; //off topic
 const possibleReplies = [
     'https://tenor.com/bWq7Q.gif',
     'https://tenor.com/bCNLB.gif',
@@ -86,7 +87,7 @@ async function dandyTroll() {
             // Filter out ignored keywords
             const activeKeywords = keyWords.filter(keyword => {
                 const ignoredTime = ignoredKeywords[keyword];
-                if (!ignoredTime) return true; // Keyword not ignored
+                if (!ignoredTime) return true;
                 // Check if the 10-minute duration has passed
                 return currentTimestamp - ignoredTime > 30 * 60 * 1000;
             });
@@ -98,15 +99,12 @@ async function dandyTroll() {
                     
                     // Mark the keyword as ignored for the next 10 minutes
                     ignoredKeywords[keyword] = currentTimestamp;
-                    break; // Stop processing other keywords
+                    break;
                 }
             }
         }
     });
 }
-
-
-
 
 client.login(process.env.token);
 
