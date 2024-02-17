@@ -39,32 +39,72 @@ const possibleReplies = [
     'https://tenor.com/bCE9a.gif',
     'https://tenor.com/bCL1b.gif',
     'https://tenor.com/bKeH2.gif',
-    'https://tenor.com/byMz0.gif'
+    'https://tenor.com/byMz0.gif',
+    //2.17.24
+    'Frosty Mate',
+    'This guy...',
+    'https://tenor.com/bm7f4.gif',
+    'https://tenor.com/bHIug.gif',
+    'https://tenor.com/baj9o.gif',
+    'https://tenor.com/iAjrYrPejIS.gif',
+    'https://tenor.com/ufqzuajEQ82.gif',
+    'https://tenor.com/joGNeMhxrWP.gif',
+    'https://tenor.com/ipSZqHNtZ51.gif',
+    'https://tenor.com/bH9ZV.gif',
+    'https://tenor.com/bBnTu.gif',
+    'https://tenor.com/oQ4t.gif',
+    'https://tenor.com/biquB.gif',
+    'https://tenor.com/bG5vv.gif',
+    'https://tenor.com/bMuT8.gif',
+    'https://tenor.com/btieq.gif',
+    'https://tenor.com/eHIB7d0rFCg.gif',
+    'https://tenor.com/8p1O.gif',
+    'https://tenor.com/bip5A.gif',
+    'https://tenor.com/bmIcw.gif',
+    'https://tenor.com/bHUK7.gif'
 
+]
+
+const knownKeywords = [
+  'bm', 'log', 'died', 'admin'
 ]
 
 const keyWords = [
-    'died', 'dead', 'heli', 'admin', 'coast', 'tissy', 'run', 'bm', 'pack', 'dropped', 'crash', 'lag', 'log'
+    'dead', 'gm', 'bm', 'log', 'died', 'admin', 'heli', 'coast', 'tissy', 'run', 'pack', 'dropped', 'crash', 'lag', 'control','dragon', 'wolves', 'wolf', 'land', 'base', 'trader', 'control', 'lewd'
 ]
 
+const ignoredKeywords = {};
 
-
-async function dandyTroll(){
-    client.once('ready', () => {
-    });
+async function dandyTroll() {
+    client.once('ready', () => {});
     
     client.on('messageCreate', async message => {
         if (message.author.id === specificUserId && message.channel.id === specificChannelId) {
-          const messageContent = message.content.toLowerCase();
-          const containsKeyword = keyWords.some(keyword => messageContent.includes(keyword));
+            const messageContent = message.content.toLowerCase();
+            const currentTimestamp = Date.now();
 
-          if (containsKeyword) {
-            const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
-            await message.reply(randomReply);
-          }
+            // Filter out ignored keywords
+            const activeKeywords = keyWords.filter(keyword => {
+                const ignoredTime = ignoredKeywords[keyword];
+                if (!ignoredTime) return true; // Keyword not ignored
+                // Check if the 10-minute duration has passed
+                return currentTimestamp - ignoredTime > 30 * 60 * 1000;
+            });
+
+            for (const keyword of activeKeywords) {
+                if (messageContent.includes(keyword)) {
+                    const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
+                    await message.reply(randomReply);
+                    
+                    // Mark the keyword as ignored for the next 10 minutes
+                    ignoredKeywords[keyword] = currentTimestamp;
+                    break; // Stop processing other keywords
+                }
+            }
         }
-      });
+    });
 }
+
 
 
 
