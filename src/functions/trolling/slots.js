@@ -27,18 +27,21 @@ const possibleReplies = [
     'Someone say slots?'
 ]
 
-const slotsReactId = '1182091267132362763'
-const inGameChatId = '1145102903003074672';
+const slotsReactId = '1182091267132362763';
 
+const ignoredChannels = [
+'1186843199965237308', //cherno-player-market
+'1145102903003074672' //ingame-chat
+]
 
 
 function slots(){
     client.once('ready', () => {
     });
     client.on('messageCreate', message => {
-        const messageContent = message.content.toLocaleLowerCase();
-        if (message.channel.id === inGameChatId) return;
+        if (ignoredChannels.includes(message.channel.id)) return;
         if (message.author.bot) return;
+        const messageContent = message.content.toLocaleLowerCase();
         if (messageContent.includes('slots')) {
             const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
             message.reply(randomReply);
