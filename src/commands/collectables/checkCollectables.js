@@ -21,7 +21,6 @@ module.exports = {
     ).join('\n');
 
             if (collectables) {
-                console.log('user: ', user)
                 await interaction.reply({ content: `${user.username} has the following collectables: \n \n${collectables}`, ephemeral: false });
             } else {
                 await interaction.reply({ content: `${user.username} has no logged collectables`, ephemeral: false });

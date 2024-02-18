@@ -28,18 +28,17 @@ async function checkGsheet(userId) {
             const sheetName = sheet.properties.title;
             const { data: { values } } = await sheets.spreadsheets.values.get({
                 spreadsheetId,
-                range: `${sheetName}!A:B`, // assuming userId is in column A and date in column B
+                range: `${sheetName}!A:B`,
             });
 
             const dates = values
-                .filter(row => row[0] === userId) // Filter rows with matching userId
-                .map(row => row[1]); // Extract dates
+                .filter(row => row[0] === userId)
+                .map(row => row[1]);
 
             if (dates.length > 0) {
                 result.push({ sheetName, dates });
             }
         }
-        console.log('gsheet result: ', result)
         return result;
         
     } catch (err) {
