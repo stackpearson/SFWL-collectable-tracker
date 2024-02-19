@@ -71,7 +71,7 @@ const knownKeywords = [
 ]
 
 const keyWords = [
-    'dead', 'gm', 'bm', 'log', 'died', 'admin', 'heli', 'coast', 'tissy', 'run', 'pack', 'dropped', 'crash', 'lag', 'control','dragon', 'wolves', 'wolf', 'land', 'base', 'trader', 'control', 'lewd'
+    'dead', 'fuck', 'boi', 'rank', 'beating', 'bed', 'shit', 'gm', 'heli', 'coast', 'tissy', 'run', 'pack', 'dropped', 'crash', 'lag', 'control','dragon', 'wolves', 'wolf', 'land', 'base', 'trader', 'control', 'lewd'
 ]
 
 const ignoredKeywords = {};
@@ -89,7 +89,7 @@ async function dandyTroll() {
                 const ignoredTime = ignoredKeywords[keyword];
                 if (!ignoredTime) return true;
                 // Check if the 10-minute duration has passed
-                return currentTimestamp - ignoredTime > 30 * 60 * 1000;
+                return currentTimestamp - ignoredTime > 51 * 60 * 1000;
             });
 
             for (const keyword of activeKeywords) {
