@@ -60,6 +60,7 @@ const keyWords = [
     'huh',
     'idk',
     'wdym',
+    'wtf'
 ]
 
 async function stanTroll() {
