@@ -4,6 +4,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 const dandyTroll = require("../src/functions/trolling/dandy");
 const snowTest = require('../src/functions/trolling/test');
 const slots = require('../src/functions/trolling/slots');
+const stanTroll = require('../src/functions/trolling/stan');
 client.commands = new Collection();
 
 require('dotenv').config();
@@ -22,5 +23,6 @@ const commandFolders = fs.readdirSync("./src/commands");
 })();
 
 dandyTroll();
+stanTroll();
 snowTest();
 slots();

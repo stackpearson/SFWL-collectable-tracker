@@ -67,11 +67,11 @@ const possibleReplies = [
 ]
 
 const knownKeywords = [
-  'bm', 'log', 'died', 'admin'
+  'bm', 'log', 'died', 'admin', 'rank'
 ]
 
 const keyWords = [
-    'dead', 'fuck', 'boi', 'rank', 'beating', 'bed', 'shit', 'gm', 'heli', 'coast', 'tissy', 'run', 'pack', 'dropped', 'crash', 'lag', 'control','dragon', 'wolves', 'wolf', 'land', 'base', 'trader', 'control', 'lewd'
+    'dead', 'fuck', 'boi', 'beating', 'bed', 'shit', 'gm', 'heli', 'coast', 'tissy', 'run', 'pack', 'dropped', 'crash', 'lag', 'control','dragon', 'wolves', 'wolf', 'land', 'base', 'trader', 'control', 'lewd'
 ]
 
 const ignoredKeywords = {};
