@@ -82,7 +82,7 @@ async function stanTroll() {
             }
 
             // Check if the message content matches any of the keywords individually
-            if (reactionIDs.length === 1 || keyWords.includes(messageContent)) {
+            if (reactionIDs.length === 1 || words.length === 1 || keyWords.includes(messageContent)) {
                 const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
                 await message.reply(randomReply);
 
