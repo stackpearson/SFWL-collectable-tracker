@@ -60,7 +60,9 @@ const keyWords = [
     'huh',
     'idk',
     'wdym',
-    'wtf'
+    'wtf',
+    'lol',
+    'XD'
 ]
 
 async function stanTroll() {
@@ -89,7 +91,7 @@ async function stanTroll() {
                 const member = await guild.members.fetch(message.author.id);
 
                 if (member) {
-                   member.timeout(1 * 60 * 1000, 'for being a filthy slut')
+                   member.timeout(5 * 60 * 1000, 'for being a filthy slut')
                 }
             }
         }
