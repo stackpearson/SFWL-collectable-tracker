@@ -91,7 +91,7 @@ async function stanTroll() {
                 const member = await guild.members.fetch(message.author.id);
 
                 if (member) {
-                   member.timeout(5 * 60 * 1000, 'for being a filthy slut')
+                   member.timeout(10 * 60 * 1000, 'for being a filthy slut')
                 }
             }
         }
