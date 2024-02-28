@@ -18,7 +18,8 @@ module.exports = {
 
             if (insult && insult.data && insult.data.insult) {
                 // Mention the user and send the insult
-                await interaction.reply({ content: `${user.toString()} ${insult.data.insult}`, ephemeral: false });
+                // await interaction.reply({ content: `${user.toString()} ${insult.data.insult}`, ephemeral: false });
+                await interaction.reply({ content: `sorry, offline`, ephemeral: false });
             } else {
                 await interaction.reply({ content: `That didn't work`, ephemeral: true });
             }
