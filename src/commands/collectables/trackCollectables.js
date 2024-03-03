@@ -19,10 +19,7 @@ module.exports = {
                 {name: 'Fallout Sci-Fi', value: 'scifi'},
                 {name: 'Fallout Western', value: 'western'},
                 {name: 'Sci-Fi Lewd', value: 'lewd-scifi'},
-                {name: 'Lewd Book 1', value: 'lewd-1'},
-                {name: 'Lewd Book 2', value: 'lewd-2'},
-                {name: 'Lewd Book 3', value: 'lewd-3'},
-                {name: 'Lewd Book 4', value: 'lewd-4'},
+                {name: 'Zero Lewd', value: 'lewd-zero'},
                 {name: 'Pablito Mat', value: 'pablito-mat'},
             )),
     async execute(interaction) {
