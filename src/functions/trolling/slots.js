@@ -21,10 +21,23 @@ const possibleReplies = [
     'https://tenor.com/bWPQq.gif',
     'https://tenor.com/bFg80.gif',
     'https://tenor.com/bkDCC.gif',
+    'https://tenor.com/banUJ.gif',
+    'https://tenor.com/bTqun.gif',
+    'https://tenor.com/bvh1h.gif',
+    'https://tenor.com/pHiNB7HOsKP.gif',
+    'https://tenor.com/uWDn.gif',
+    'https://tenor.com/9lTR.gif',
+    'https://tenor.com/5SiJ.gif',
+    'https://tenor.com/Z7JT.gif',
+    'https://tenor.com/bpKRP.gif',
+    'https://tenor.com/bmXfS.gif',
+    'https://tenor.com/buU5W.gif',
     'Yes, slots indeed',
     'Slots my friend, slots',
     'SLOTS',
-    'Someone say slots?'
+    'Someone say slots?',
+    'Slots burddderrr',
+    'Slots, Thots, and shots brudder'
 ]
 
 const slotsReactId = '1182091267132362763';
@@ -42,7 +55,7 @@ function slots(){
         if (ignoredChannels.includes(message.channel.id)) return;
         if (message.author.bot) return;
         const messageContent = message.content.toLocaleLowerCase();
-        if (messageContent.includes('slots')) {
+        if (messageContent.includes('!slots')) {
             const randomReply = possibleReplies[Math.floor(Math.random() * possibleReplies.length)];
             message.reply(randomReply);
             message.react(slotsReactId)
