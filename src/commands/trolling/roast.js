@@ -17,7 +17,6 @@ module.exports = {
             const insult = await generateRoast();
 
             if (insult) {
-                console.log('insult: ', insult)
                 await interaction.reply({ content: `${user} ${insult}`, ephemeral: false });
             } else {
                 await interaction.reply({ content: `That didn't work`, ephemeral: true });
