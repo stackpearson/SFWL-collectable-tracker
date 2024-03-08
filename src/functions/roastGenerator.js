@@ -8,7 +8,7 @@ const openai = new OpenAI({
 
 async function generateRoast() {
     try {
-        const prompt = "Generate a funny roast. It can be a bit raunchy too. In fact, the more embarassing, the better";
+        const prompt = "Generate a unique, funny and brutal roast. It can be a bit raunchy too, curse words are just fine. In fact, the more embarassing, the better. Try to avoid roasts involving your mom jokes.";
 
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
