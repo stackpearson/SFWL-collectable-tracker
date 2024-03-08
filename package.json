@@ -16,6 +16,6 @@
     "dotenv": "^16.4.1",
     "fs": "^0.0.1-security",
     "googleapis": "^133.0.0",
-    "openai": "^4.28.0"
+    "openai": "^4.28.4"
   }
 }
