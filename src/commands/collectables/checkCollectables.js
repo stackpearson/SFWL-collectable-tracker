@@ -28,7 +28,13 @@ module.exports = {
 
         } catch (error) {
             console.error('Error in checkSheet:', error.message);
-            await interaction.reply({ content: error.message, ephemeral: true });
+
+            if (error.name === 'DiscordAPIError' && error.code === 10062) {
+                console.error('Interaction expired or unknown: ', error.message)
+            } else {
+                await interaction.reply({ content: error.message, ephemeral: true }).catch(console.error);
+            }
+            
         }
     }
 };
